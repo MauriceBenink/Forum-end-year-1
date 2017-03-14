@@ -1,0 +1,46 @@
+Assembler(userinfo)
+	>table construct
+		> Main-Topics
+			>tr construct
+				>security
+					>readlevel
+					>toolbar
+						>construct per tool
+							> edit
+							> remove
+							> change status
+							> add moderator
+							> remove moderator
+		> Sub-topics
+			>tr construct
+				>security
+					>readlevel
+					>toolbar
+						>construct per tool
+							> edit
+							> remove
+							> change status
+							> add moderator
+							> remove moderator
+		> Posts
+			>tr construct
+				>security
+					>readlevel
+					>toolbar
+						>construct per tool
+							> edit
+							> remove
+							> change status
+							> add moderator
+							> remove moderator
+		> Comments
+			>tr construct
+				>security
+					>readlevel
+					>toolbar
+						>construct per tool
+							> edit
+							> remove
+							> change status
+							> add moderator
+							> remove moderator

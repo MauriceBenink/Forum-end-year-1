@@ -1,0 +1,5 @@
+#exceptions to the blacklist # = ignore and $ = must be exact to the exception, without $ it will pass the exception if it contains the word example: Exception = bad word = Badass. this word conttains bad so its being treated as exception. however if its $bad then it will not pass the exeption
+class
+mass
+flass
+passen

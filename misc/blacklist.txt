@@ -1,0 +1,78 @@
+anal
+anus
+arse
+ass
+ballsack
+balls
+bastard
+bitch
+biatch
+bloody
+blowjob
+blow job
+bollock
+bollok
+boner
+boob
+bugger
+bum
+butt
+buttplug
+clitoris
+cock
+coon
+crap
+cunt
+damn
+dick
+dildo
+dyke
+fag
+feck
+fellate
+fellatio
+felching
+fuck
+f u c k
+fudgepacker
+fudge packer
+flange
+#List with words that are prohibited to use, # disables the line. $ makes it neccery to exactly match the word instead of contain (badass contains ass, ass is not allowed so badass will be blocked, if $ is inculded then it mus be exact to ass so badass wouldnt be blocked in this case)
+Goddamn
+God damn
+hell
+homo
+jerk
+jizz
+knobend
+knob end
+labia
+lmao
+lmfao
+muff
+nigger
+nigga
+omg
+penis
+piss
+poop
+prick
+pube
+pussy
+queer
+scrotum
+sex
+shit
+s hit
+sh1t
+slut
+smegma
+spunk
+tit
+tosser
+turd
+twat
+vagina
+wank
+whore
+wtf

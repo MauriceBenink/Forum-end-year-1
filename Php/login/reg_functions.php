@@ -7,7 +7,7 @@ function check_req($type,$input)
     switch ($type) {
         case "password":
             if ((count(str_split($input)) >= 7)&&(count(str_split($input)) <= 20)) {
-                if ((preg_match('/[0123456789]/', $input)) && (!preg_match('/[\(\)\[\]\}\{\<\>]/', $input)) && (preg_match('/[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/', $input)) && (preg_match('/[abcdefghijklmnopqrstuvwxyz]/', $input))) {
+                if ((preg_match('/[0123456789]/', $input)) && (!preg_match('/[\(\)\[\]\}\{\<\>\;]/', $input)) && (preg_match('/[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/', $input)) && (preg_match('/[abcdefghijklmnopqrstuvwxyz]/', $input))) {
 
 
                     return true;
@@ -22,7 +22,7 @@ function check_req($type,$input)
         case "displayname":
         case "username":
             if ((count(str_split($input)) >= 5)&&(count(str_split($input)) <= 20)) {
-                if (!preg_match('/[\(\)\[\]\}\{\<\>]/', $input)) {
+                if (!preg_match('/[\(\)\[\]\}\{\<\>\;]/', $input)) {
 
 
                     return true;
@@ -35,7 +35,7 @@ function check_req($type,$input)
             break;
         case "email":
             if ((count(str_split($input)) >= 5)&&(count(str_split($input)) <= 50)) {
-                if (!preg_match('/[\(\)\[\]\}\{/</>]/', $input)) {
+                if (!preg_match('/[\(\)\[\]\}\{/</>\;]/', $input)) {
                     if((preg_match('/[@]/',$input))&&(preg_match('/[.]/',$input))){
 
 

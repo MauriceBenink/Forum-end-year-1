@@ -121,7 +121,7 @@ class page_assembler extends assembler {
             elementsend = element +'%%'+ element2 +'%%'+element3;
             
                                     
-            try{if(((element2.match(/[\<\>\{\}\[\]]/)).length>0)){
+            try{if(((element2.match(/[\<\>\{\}\[\]\;]/)).length>0)){
                 alert('the following symbols arent allowed []{}<>');
             }}
             catch(err){
@@ -199,11 +199,25 @@ class page_assembler extends assembler {
                 elementdesc = $(element).children().eq(2).val();
                 elementcont = $(element).children().eq(4).val();
                 console.log(elementtitle + ''+elementdesc+''+elementcont);
-                
+                try{if((((elementtitle+''+elementdesc+''+elementcont).match(/[\<\>\{\}\[\]\;]/)).length>0)){
+                    alert('the following symbols arent allowed []{}<>;');
+                }}
+                catch(err){
+                    console.log (elementcont.length);
+                    console.log (elementdesc.length);
+                    console.log (elementtitle.length);
+                    if(elementtitle.length > 10&&elementtitle.length <50 && elementdesc.length > 10 && elementdesc.length < 100 && elementcont.length > 50 && elementcont.length < 2000){
+                        alert('accepted');
+                    }else{
+                        alert('too long or too short');
+                    }
+                    
+                }
             }
 </script>";
+            return $return;
         }
-        return $return;
+
     }
 
     public function javascript_constructor(){

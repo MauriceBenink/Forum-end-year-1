@@ -35,10 +35,8 @@ function check_req($type,$input)
             break;
         case "email":
             if ((count(str_split($input)) >= 5)&&(count(str_split($input)) <= 50)) {
-                if (!preg_match('/[\(\)\[\]\}\{/</>\;]/', $input)) {
+                if (!preg_match('/[\(\)\[\]\}\{\<\>\;]/', $input)) {
                     if((preg_match('/[@]/',$input))&&(preg_match('/[.]/',$input))){
-
-
                         return true;
                     }else{
                         $register_error_message = "Please use a valid emailadress";

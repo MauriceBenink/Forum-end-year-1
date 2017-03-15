@@ -101,7 +101,7 @@ class page_assembler extends assembler {
 <div id = 'comment-box'>
     <input class = 'title' name = 'title' type = 'text' placeholder='comment title'>
     <textarea></textarea>
-    <input class = 'geustsee' type='checkbox' name=cansee> geusts can see this comment
+    <input class = 'geustsee' type='checkbox' name=cansee> geusts can't see this comment
     <br>
     <button id = 'send_comment'>Send</button>
     <script>
@@ -204,7 +204,7 @@ class page_assembler extends assembler {
                 }}
                 catch(err){
                     if(elementtitle.length > 10&&elementtitle.length <50 && elementdesc.length > 10 && elementdesc.length < 100 && elementcont.length > 50 && elementcont.length < 2000){
-                        alert('accepted');
+                        elementsend = elementtitle+'%%'+elementdesc+'%%'+elementcont;
                     }else{
                         alert('too long or too short');
                     }
@@ -214,7 +214,6 @@ class page_assembler extends assembler {
 </script>";
             return $return;
         }
-
     }
 
     public function javascript_constructor(){

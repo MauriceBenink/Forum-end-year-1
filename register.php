@@ -55,7 +55,7 @@ if(!isset($_SESSION['id'])) {
                             $hash = $random_hash = md5(uniqid(rand(), true));
                             reg_account($username, $displayname, $password, $email, $hash);
                             //send a email to the given emailadress with the $hash code !
-                            echo "<br> a mail has been send to: $email with a vertification code, upon login youll be taken to the vartification page automaticly";
+                            echo "<br> a mail has been send to: $email with a vertification code, upon login youll be taken to the vartification page automaticly<script>setTimeout(function(){window.location.href ='Index.php'},5000)</script>";
                         }
                     }
                 }

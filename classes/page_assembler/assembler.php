@@ -101,7 +101,74 @@ class assembler{
         }
     }
 
-    public function edit($data)
+    public function edit_post($dataz)
+    {
+        $content = explode('**', $dataz);
+        include_once "{$_SERVER['DOCUMENT_ROOT']}/forum/classes/database/database.php";
+        include_once "{$_SERVER['DOCUMENT_ROOT']}/forum/Php/global_functions.php";
+
+        $user = $this->_user;
+        $type = $this->_type;
+
+        switch ($type) {
+            case 0:
+                $data = database::standard("SELECT * FROM main_topics WHERE id = {$content[4]}");
+                $level2 = $data[0]['user_level_req_vieuw'];
+                break;
+            case 1:
+                $data = database::standard("SELECT * FROM sub_topics WHERE id = {$content[4]}");
+                $level2 = $data[0]['user_level_req_vieuw'];
+                break;
+            case 2:
+                $data = database::standard("SELECT * FROM posts WHERE id = {$content[4]}");
+                $level2 = $data[0]['user_level_req_vieuw'];
+                break;
+            default:
+                $level2 = -1;
+        }
+
+        if ($this->_page_assembler->check_edit($this->_user, $data) || $this->_page_assembler->check_edit($this->_user, $data) == 'owner') {
+
+
+            $level1 = $type * 3 + 2;
+            if ($content[3] == true) {
+                $content[3] = 8;
+            } else {
+                $content[3] = 9;
+            }
+
+            if ($level2 > $level1) {
+                $level = $level2;
+            } else {
+                $level = $level1;
+            }
+
+
+            if ($level >= $user[0]['level']) {
+                if (!preg_match('/[\(\)\[\]\}\{\<\>\;]/', $content[0] . '' . $content[1] . '' . $content[2])) {
+                    if (strlen($content[0]) >= 10 && strlen($content[0]) < 50 && strlen($content[1]) >= 10 && strlen($content[1]) < 100 && strlen($content[2]) >= 50 && strlen($content[2]) < 2000) {
+                        if (blacklist($content[0] . '' . $content[1] . '' . $content[2])) {
+                            echo "SUCSESS <br><br><br><br><br><br><br><br>";
+                            switch ($type) {
+                                case 0:
+                                    database::update_main_topic($content[0], $content[1], $content[3], $content[4]);
+                                    break;
+                                case 1:
+                                    database::update_sub_topic($content[0], $content[1], $content[3], $content[4]);
+                                    break;
+                                case 2:
+                                    database::update_post($content[0], $content[1], $content[2], $content[3], $content[4]);
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+            echo "<script>location.reload();</script>";
+        }
+    }
+
+    public function edit_comment($data)
     {
         $element = explode('**', $data);
         include_once "{$_SERVER['DOCUMENT_ROOT']}/forum/classes/database/database.php";

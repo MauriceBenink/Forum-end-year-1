@@ -28,12 +28,13 @@ if((isset($_POST["to_top"]))){
     echo "false%%<script>window.location.replace('landing.php');</script>";
 }
 
-if(isset($_POST['edit_button'])&&!empty($_POST['edit_button'])){
-    if(count(explode('/',$_SESSION['path'])) == 3){
-    include("nice_edit.php");
-    $rest = '<input class = "geustsee" type="checkbox" name="cansee"> geusts can see this comment<br><button id = "edit_comment">edit</button>';
-    $title = '<input class = "title" name = "title" type = "text" placeholder="comment title">';
-       $type = "comment";
+if(isset($_POST['edit_button'])&&!empty($_POST['edit_button'])) {
+    $path = explode('/', $_SESSION['path']);
+    if (count($path) == 3) {
+        include("nice_edit.php");
+        $rest = '<input class = "geustsee" type="checkbox" name="cansee"> geusts can see this comment<br><button id = "edit_comment">edit</button>';
+        $title = '<input class = "title" name = "title" type = "text" placeholder="comment title">';
+        $type = "comment";
         echo "false%%<script>
 title = '$title';
 element = $(document).find('div#{$_POST['edit_button']} > .comment-content-container > .comment-content');
@@ -70,11 +71,83 @@ $(document).find('#Insert-container').html('$niceEdit'+elementComment+'</div></d
             }
 
 </script>";
-    }else{
-       $type = "post";
+    } else {
+        $return = "false%%";
+        include_once "{$_SERVER['DOCUMENT_ROOT']}/forum/classes/database/database.php";
+        if (database::getConn() == '') {
+            new database();
+        }
+        switch (count($path)) {
+            case 1:
+                $data = database::standard("SELECT * FROM sub_topics WHERE id ={$_POST['edit_button']}");
+                $content ='<br><br>';
+                $elementcont = "elementcont = kasdhjkashdjkahskjdhaskjhjsahkjdhaksjdhjahdskajshdjkashdjkahsdjkahkjdshkjashdjkahsjkdhasjkdhakhsdkajsdhkahsdkjdshakjdhaksjdh;";
+                break;
+            case 2:
+                $data = database::get_post($_POST['edit_button']);
+                $content = "'<textarea placeholder = \"post content\">{$data['content']}</textarea><br>'";
+                $elementcont = "elementcont = $(element).children().eq(4).val();";
+                break;
+            default:
+                $data = database::standard("SELECT * FROM main_topics WHERE id ={$_POST['edit_button']}");
+                $content ='<br><br>';
+                $elementcont = "elementcont = kasdhjkashdjkahskjdhaskjhjsahkjdhaksjdhjahdskajshdjkashdjkahsdjkahkjdshkjashdjkahsjkdhasjkdhakhsdkajsdhkahsdkjdshakjdhaksjdh;";
+                break;
+
+        }
+        if($data['user_level_req_vieuw'] == 8){
+            $checked = "checked";
+        }else{
+            $checked = '';
+        }
+
+        $return .= "<script>
+                    $(document).find('#Insert-container').html('' +
+                        '<input placeholder = \"post title\" value = \"{$data['name']}\">' +
+                        '<br>' +
+                        '<input placeholder = \"post description\" value = \"{$data['description']}\">' +
+                        '<br>' +                    
+                        $content +
+                        '<input class = \'geustsee\' type = \'checkbox\' $checked>geusts cant see '+
+                        '<br>' +
+                        '<button id = \'edit-post\'>edit post</button>'
+                    );
+                     $(document).find('#edit-post').click(function(){post_send()});
+                     
+                     
+                     
+                     
+           function post_send(){
+            element = $(document).find('#Insert-container');
+            elementtitle = $(element).children().eq(0).val();
+            elementdesc = $(element).children().eq(2).val();
+            $elementcont;
+                elementcheck = $(element).children().eq(6).prop('checked');
+                console.log(elementtitle + '||'+elementdesc+'||'+elementcont);
+                console.log(elementtitle.length + '||'+elementdesc.length+'||'+elementcont.length);
+                try{if((((elementtitle+''+elementdesc+''+elementcont).match(/[\<\>\{\}\[\]\;]/)).length>0)){
+                    alert('the following symbols arent allowed []{}<>;');
+                }}
+                catch(err){
+                    if(elementtitle.length >= 10&&elementtitle.length <50 && elementdesc.length >= 10 && elementdesc.length < 100 && elementcont.length >= 50 && elementcont.length < 2000){
+                        elementsend = elementtitle+'**'+elementdesc+'**'+elementcont+'**'+elementcheck+'**'+'{$_POST['edit_button']}';
+                        ajax_processer('edit_post',elementsend);
+                    }else{
+                        alert('too long or too short');
+                    }
+
+                }
+            }
+                </script>";
+
+        echo $return;
     }
 }
 
+if(isset($_POST['edit_post'])&&!empty($_POST['edit_post'])){
+    $_SESSION['edit_post'] = $_POST['edit_post'];
+    echo "true";
+}
 
 if(isset($_POST['edit_comment'])&&!empty($_POST['edit_comment'])){
     $_SESSION['edit_comment'] = $_POST['edit_comment'];

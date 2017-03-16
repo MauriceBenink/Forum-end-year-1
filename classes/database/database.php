@@ -129,6 +129,20 @@ class database{
         return  $return;
     }
 
+    public static function update_sub_topic($title,$desc,$vieuw,$id){
+        database::no_return("UPDATE `sub_topics` SET `name` = '$title', `description` = '$desc', `user_level_req_vieuw` = '$vieuw', WHERE `sub_topics`.`id` = $id;");
+    }
+
+    public static function update_main_topic($title,$desc,$vieuw,$id){
+        database::no_return("UPDATE `main_topics` SET `name` = '$title', `description` = '$desc' `user_level_req_vieuw` = '$vieuw',WHERE `main_topics`.`id` = $id;");
+    }
+
+    public static function update_post($title,$desc,$content,$vieuw,$id){
+        $datum = date("Y-m-d");
+
+        database::no_return("UPDATE `posts` SET `name` = '$title', `description` = '$desc', `content` = '$content', `date` = '$datum', `user_level_req_vieuw` = '$vieuw' WHERE `posts`.`id` = $id;");
+    }
+
 
 
 }

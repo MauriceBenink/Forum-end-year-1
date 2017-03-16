@@ -55,8 +55,13 @@ if(isset($_SESSION['new_post'])&&!empty($_SESSION['new_post'])){
     unset($_SESSION['new_post']);
 }
 
+if(isset($_SESSION['edit_post'])&&!empty($_SESSION['edit_post'])){
+    $test->edit_post($_SESSION['edit_post']);
+    unset($_SESSION['edit_post']);
+}
+
 if(isset($_SESSION['edit_comment'])&&!empty($_SESSION['edit_comment'])){
-    $test ->edit($_SESSION['edit_comment']);
+    $test ->edit_comment($_SESSION['edit_comment']);
     unset($_SESSION['edit_comment']);
 }
 

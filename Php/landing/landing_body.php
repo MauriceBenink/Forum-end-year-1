@@ -43,21 +43,29 @@ if(isset($_GET['path'])&&!empty($_GET['path'])){
 }else{
     $test = new assembler($user);
 }
-if(isset($_SESSION['delete'])&&!empty($_SESSION['delete'])&&isset($_GET['path'])&&isset($_SESSION['id'])){
+
+if(isset($_SESSION['delete'])&&!empty($_SESSION['delete'])&&isset($_SESSION['id'])){
     $test -> delete($_SESSION['delete']);
     echo "Deleted";
     unset($_SESSION['delete']);
 }
+
+if(isset($_SESSION['new_post'])&&!empty($_SESSION['new_post'])){
+    $test ->new_post($_SESSION['new_post']);
+    unset($_SESSION['new_post']);
+}
+
 if(isset($_SESSION['edit_comment'])&&!empty($_SESSION['edit_comment'])){
     $test ->edit($_SESSION['edit_comment']);
     unset($_SESSION['edit_comment']);
 }
+
 echo "<br>welcome $display ";
 if (isset($_POST['logout'])) {
     unset($_SESSION['id']);
     header("Location: landing.php?");
 }
-object_r($test);
+debug_r($test);
 echo "<div id = forum-container>";
 $test->assamble_page();
 echo "</div>";

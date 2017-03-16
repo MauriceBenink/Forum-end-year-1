@@ -62,8 +62,8 @@ class assembler{
         if (count($this->_path) >= 3) {
             $return = $this->_page_assembler->comment_box_constructor($this->_user, $this->_path[2]);
             echo $return;
-        } elseif(isset($this->_path)&&!empty($this->_path)) {
-            $return = $this->_page_assembler->place_post_constructor($this->_user, $this->_type);
+        } elseif((isset($this->_path)&&!empty($this->_path))||$this->_path == 0) {
+            $return = $this->_page_assembler->place_post_constructor($this->_user, $this->_type,$this->_path);
             echo $return;
         }
         $this->_page_assembler->javascript_constructor();
@@ -146,7 +146,7 @@ class assembler{
             echo "<br>";
             switch($this->getType()) {
                 case 0:
-                    $permission = false;
+                    $type = "main_topics";
                     break;
                 case 1:
                     $type = "sub_topics";
@@ -175,6 +175,66 @@ class assembler{
     public function getPath()
     {
         return $this->_path;
+    }
+
+    public function new_post($content)
+    {
+        $user = $this->_user;
+        $data = $this->_data;
+        $type = $this->_type;
+
+
+        $level1 = $type * 3 + 2;
+        switch ($type) {
+            case 0:
+                $level2 = 2;
+                break;
+            case 1:
+                $level2 = database::standard("SELECT * FROM main_topics WHERE id = {$data[0]['upper_level_id']}")[0];
+                $upper = $level2['id'];
+                $level2 = $level2['user_level_req_vieuw'];
+                break;
+            case 2:
+                $level2 = database::standard("SELECT * FROM sub_topics WHERE id = {$data[0]['upper_level_id']}")[0];
+                $upper = $level2['id'];
+                $level2 = $level2['user_level_req_vieuw'];
+                break;
+            default:
+                $level2 = -1;
+        }
+        if($content[3] == true){
+            $content[3] = 8;
+        }else{
+            $content[3] = 9;
+        }
+
+        if ($level2 > $level1) {
+            $level = $level2;
+        } else {
+            $level = $level1;
+        }
+
+
+        if ($level >= $user[0]['level']) {
+            if (!preg_match('/[\(\)\[\]\}\{\<\>\;]/', $content[0] . '' . $content[1] . '' . $content[2])) {
+                if (strlen($content[0]) >= 10 && strlen($content[0]) < 50 && strlen($content[1]) >= 10 && strlen($content[1]) < 100 && strlen($content[2]) >= 50 && strlen($content[2]) < 2000) {
+                    if(blacklist($content[0] . '' . $content[1] . '' . $content[2])){
+                        switch($type){
+                            case 0:
+                                database::new_main_topic($content[0],$content[1],$content[3]);
+                                break;
+                            case 1:
+                                database::new_sub_topic($user,$content[0],$content[1],$content[3],$upper);
+                                break;
+                            case 2:
+                                database::new_post($user,$content[0],$content[1],$content[2],$content[3],$upper);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+        echo "<script>location.reload();</script>";
     }
 }
 ?>

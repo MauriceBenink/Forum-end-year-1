@@ -141,6 +141,11 @@ if(isset($_POST['new_comment'])&&!empty($_POST['new_comment'])) {
     echo 'true' . "%%";
 }
 
+if(isset($_POST['new_post'])&&!empty($_POST['new_post'])) {
+    echo "true";
+    $_SESSION['new_post'] = explode("%%",$_POST['new_post']);
+}
+
 
 
 ?>

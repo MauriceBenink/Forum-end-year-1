@@ -94,7 +94,26 @@ class database{
         $datum = date("Y-m-d");;
         $user_id = $user[0]["id"];
 
-           database::no_return("INSERT INTO `comments` (`name`, `content`, `score`, `status`, `date`, `user_id`, `upper_level_id`, `user_level_req_vieuw`, `user_level_req_edit`) VALUES ('$title', '$content', '$score', '$status', '$datum', '$user_id', '$path', '$vieuw', '4')");
+        database::no_return("INSERT INTO `comments` (`name`, `content`, `score`, `status`, `date`, `user_id`, `upper_level_id`, `user_level_req_vieuw`, `user_level_req_edit`) VALUES ('$title', '$content', '$score', '$status', '$datum', '$user_id', '$path', '$vieuw', '4')");
+    }
+
+    public static function new_post($user,$title,$desc,$content,$vieuw,$upper){
+        $datum = date("Y-m-d");
+
+        database::no_return("INSERT INTO `posts` (`name`, `description`, `user_id`, `content`, `status`, `rating`, `upper_level_id`, `date`, `user_level_req_vieuw`, `user_level_req_edit`) VALUES ('$title', '$desc', '{$user[0]['id']}', '$content', '0', '0', '$upper', '$datum', '$vieuw', '5')");
+
+
+
+    }
+
+    public static function new_sub_topic($user,$title,$desc,$vieuw,$upper){
+
+        database::no_return("INSERT INTO `sub_topics` (`name`, `description`, `status`, `user_level_req_vieuw`, `user_level_req_edit`, `user_id`, `upper_level_id`) VALUES ('$title', '$desc', '0', '$vieuw', '2', '{$user[0]['id']}', '$upper')");
+    }
+
+    public static function new_main_topic($title,$desc,$vieuw){
+
+        database::no_return("INSERT INTO `main_topics` (`name`, `description`, `status`, `user_level_req_vieuw`, `user_level_req_edit`) VALUES ('$title', '$desc', '$vieuw', '8', '2');");
     }
 
     public static function edit_comment($title,$content,$path,$vieuw,$id){

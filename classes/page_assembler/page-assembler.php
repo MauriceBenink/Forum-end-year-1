@@ -160,7 +160,7 @@ class page_assembler extends assembler {
         return  $return;
     }
 
-    public function place_post_constructor($user,$type){
+    public function place_post_constructor($user,$type,$path){
         $permission = $type*3+2;
         switch($type){
             case 0:
@@ -185,26 +185,40 @@ class page_assembler extends assembler {
                     '<input placeholder = \"post title\">' +
                     '<br>' +
                     '<input placeholder = \"post description\">' +
+                    '<br>' +";
+                    if(count($path) == 2){
+                        $return .="'<textarea placeholder = \"post content\" ></textarea>' +
+                    '<br>' +"
+                        ;}
+                    $return .="
+                    '<input class = \'geustsee\' type = \'checkbox\'>geusts cant see '+
                     '<br>' +
-                    '<textarea placeholder = \"post content\" ></textarea>' +
-                    '<br>' +
-                    '<button id = \'new-post\'>make new post</button>' +
-                    '');
+                    '<button id = \'new-post\'>make new post</button>'
+                    );
                      $(document).find('#new-post').click(function(){post_send()});
             }
             
             function post_send(){
                 element = $(document).find('#make-new-post');
                 elementtitle = $(element).children().eq(0).val();
-                elementdesc = $(element).children().eq(2).val();
-                elementcont = $(element).children().eq(4).val();
-                console.log(elementtitle + ''+elementdesc+''+elementcont);
+                elementdesc = $(element).children().eq(2).val();";
+                if(count($path) == 2){
+                    $return .=
+                        "elementcont = $(element).children().eq(4).val();"
+                    ;}else{
+                        $return .="elementcont = 'ajkbdjasbjkbdakjbsdkjabdjksbsaajkbdkjabdkjbsakbkjasbdjkbaksjdbjkasbdkjbasjkdbajskbdjasbjkdbakjsdbjkasbdkjabsjdkbasjkbdkajbsdkj';";
+                }
+                $return .="
+                elementcheck = $(element).children().eq(6).prop('checked');
+                console.log(elementtitle+'%%'+elementdesc+'%%'+elementcont+'%%'+elementcheck);
+                console.log(elementtitle.length + '||'+elementdesc.length+'||'+elementcont.length);
                 try{if((((elementtitle+''+elementdesc+''+elementcont).match(/[\<\>\{\}\[\]\;]/)).length>0)){
                     alert('the following symbols arent allowed []{}<>;');
                 }}
                 catch(err){
-                    if(elementtitle.length > 10&&elementtitle.length <50 && elementdesc.length > 10 && elementdesc.length < 100 && elementcont.length > 50 && elementcont.length < 2000){
-                        elementsend = elementtitle+'%%'+elementdesc+'%%'+elementcont;
+                    if(elementtitle.length >= 10&&elementtitle.length <50 && elementdesc.length >= 10 && elementdesc.length < 100 && elementcont.length >= 50 && elementcont.length < 2000){
+                        elementsend = elementtitle+'%%'+elementdesc+'%%'+elementcont+'%%'+elementcheck;
+                    ajax_processer('new_post',elementsend);
                     }else{
                         alert('too long or too short');
                     }

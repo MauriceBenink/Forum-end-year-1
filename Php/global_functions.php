@@ -7,7 +7,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
 }
 $_SESSION['LAST_ACTIVITY'] = time();
 
-function object_r($input){
+function debug_r($input){
     echo "<br><pre>";
     print_r($input);
     echo "</pre>";

@@ -6,6 +6,15 @@
     <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 </head>
 <body>
+<style>
+    .edit_button img , .remove_button img , .status_button img , .mod_button img {
+        width : 30px;
+        height : 25px;
+    }
+    .edit_button , .remove_button , .status_button , .mod_button{
+        padding : 0;
+    }
+</style>
 <?php
 session_start();
 include "php/landing/landing_body.php";

@@ -18,7 +18,7 @@ if(isset($_SESSION['id'])&&!empty($_SESSION['id'])) {
     $display = $user[0]['display_name'];
     $status = explode(",", $user[0]['status']);
     if($status[0] == 0)
-    {   //header("Location: verification.php?");
+    {   header("Location: verification.php?");
         die();
     }else if($status[0] == 2) {
     }

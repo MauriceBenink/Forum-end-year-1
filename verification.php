@@ -5,18 +5,18 @@
 <?php
 session_start();
 include "php/forum.php";
-include "php/reg_functions.php";
+include "php/login/reg_functions.php";
 include "php/global_functions.php";
 ?>
 
 
 <?php
-if(isset($_COOKIE['id'])) {
+if(isset($_SESSION['id'])) {
     $register_error_message = '';
     $verification = '';
     if (isset($_POST['verification']) && !empty($_POST['verification'])) {
         $verification = $_POST['verification'];
-        $user = user_by_id($_COOKIE['id']);
+        $user = user_by_id($_SESSION['id']);
         $status = explode(",", $user['status']);
         if ($status[0] == 0) {
             if ($status[1] == $verification) {
@@ -31,7 +31,7 @@ if(isset($_COOKIE['id'])) {
         }
     }
     if (isset($_REQUEST['logout'])) {
-        setcookie('id', 'die', 1);
+        unset($_SESSION['id']);
         header("Location: index.php?");
     }
 }else{

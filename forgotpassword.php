@@ -20,7 +20,7 @@ $code = '';
 $password = '';
 $confirmpassword = "";
 
-if(!isset($_COOKIE['id'])) {
+if(!isset($_SESSION['id'])) {
     if(isset($_POST['username'])&&isset($_POST['email'])&&(empty($_POST['code'])||!isset($_POST['code']))) {
         $username = check_POST('username',true);
         $email = check_POST('email',true);
@@ -44,7 +44,7 @@ if(!isset($_COOKIE['id'])) {
         $password = check_POST('password',false);
         $confirmpassword = check_POST('confirmpassword',false);
         if(empty($register_error_message)) {
-            if ($email === $confirmemail) {
+            if ($password === $confirmpassword) {
                 if (($password === $confirmpassword) && check_req('password', $password)) {
                     password_reset($username, $email, $code, $password);
                 } else {

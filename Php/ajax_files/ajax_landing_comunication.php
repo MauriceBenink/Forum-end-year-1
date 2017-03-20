@@ -209,6 +209,17 @@ if(isset($_POST['new_post'])&&!empty($_POST['new_post'])) {
     $_SESSION['new_post'] = explode("%%",$_POST['new_post']);
 }
 
+if(isset($_POST['pass-req-remove'])&&!empty($_POST['pass-req-remove'])) {
+    include_once "{$_SERVER['DOCUMENT_ROOT']}/forum/classes/database/database.php";
+    include_once "{$_SERVER['DOCUMENT_ROOT']}/forum/Php/global_functions.php";
+    if(database::getConn() == ''){
+        new database();
+    }
+    $id = $_SESSION['id'];
+    database::no_return("UPDATE users SET status = '1,NULL' WHERE users.id = $id");
+    echo "true";
+}
+
 
 
 ?>

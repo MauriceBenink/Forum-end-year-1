@@ -21,6 +21,12 @@ if(isset($_SESSION['id'])&&!empty($_SESSION['id'])) {
     {   header("Location: verification.php?");
         die();
     }else if($status[0] == 2) {
+        echo "<div id = 'passreset - alert'>IF YOU DIDNT ISSEU A PASSWORD RESET PLEASE CONTACT OUR STAFF!!!!!!</div><button id = 'pass-reset-alert'>REMOVE Password reset Request</button>
+<script> 
+element = $(document).find('#pass-reset-alert');
+element.click(function(){ajax_processer('pass-req-remove')});
+</script>
+";
     }
     ?>
     <form method="post">

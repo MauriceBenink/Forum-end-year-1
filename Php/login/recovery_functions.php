@@ -33,7 +33,7 @@ function password_reset($username,$email,$hash,$password){
                 $update_database->execute();
                 $update_database = $conn->prepare("UPDATE users SET password = SHA1('$password') WHERE users.id = $id");
                 $update_database->execute();
-                $register_error_message ="password sucsessfully changed";
+                $register_error_message ="password sucsessfully changed<script>setTimeout(function(){window.location.href ='Index.php'},2500)</script>";
             }else{
                 $register_error_message ="inccorect code";
             }

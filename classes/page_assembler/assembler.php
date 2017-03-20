@@ -127,7 +127,7 @@ class assembler{
                 $level2 = -1;
         }
 
-        if ($this->_page_assembler->check_edit($this->_user, $data) || $this->_page_assembler->check_edit($this->_user, $data) == 'owner') {
+        if ($this->_page_assembler->check_edit($this->_user, $data[0]) || $this->_page_assembler->check_edit($this->_user, $data[0]) == 'owner') {
 
 
             $level1 = $type * 3 + 2;

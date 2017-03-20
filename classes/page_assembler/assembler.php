@@ -171,10 +171,10 @@ class assembler{
     public function edit_comment($data)
     {
         $element = explode('**', $data);
+        $data = database::get_comment($element[3]);
         include_once "{$_SERVER['DOCUMENT_ROOT']}/forum/classes/database/database.php";
         include_once "{$_SERVER['DOCUMENT_ROOT']}/forum/Php/global_functions.php";
-        if ($this->_page_assembler->check_edit($this->_user, $this->_data)||$this->_page_assembler->check_edit($this->_user, $this->_data)=='owner') {
-
+        if ($this->_page_assembler->check_edit($this->_user, $data[0])||$this->_page_assembler->check_edit($this->_user, $data[0])=='owner') {
             $path = $_SESSION['path'];
             $path = explode("/", $path);
             if ($element[2] == true) {

@@ -173,7 +173,7 @@ class page_assembler extends assembler {
                 $type = "posts";
                 break;
         }
-        if($user[0]['level']<=$permission) {
+        if($user[0]['level']<$permission) {
             $make_post = "<div id = 'make-new-post'><button>New $type</button></div>";
             $return = "
 <script>

@@ -184,7 +184,7 @@ if(isset($_POST['new_comment'])&&!empty($_POST['new_comment'])) {
         new database();
     }
     $user = database::get_user($_SESSION['id']);
-    if($user[0]['level'] != 8) {
+    if($user[0]['level'] != 9) {
         $path = $_SESSION['path'];
         $path = explode("/", $path);
         if ($element[2] == true) {

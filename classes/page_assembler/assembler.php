@@ -269,7 +269,7 @@ class assembler{
             default:
                 $level2 = -1;
         }
-        if($content[3] == true){
+        if($content[3]){
             $content[3] = 8;
         }else{
             $content[3] = 9;

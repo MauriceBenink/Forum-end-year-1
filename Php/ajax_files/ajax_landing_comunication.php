@@ -187,7 +187,7 @@ if(isset($_POST['new_comment'])&&!empty($_POST['new_comment'])) {
     if($user[0]['level'] != 9) {
         $path = $_SESSION['path'];
         $path = explode("/", $path);
-        if ($element[2] == true) {
+        if ($element[2]) {
             $vieuw = 8;
         } else {
             $vieuw = 9;

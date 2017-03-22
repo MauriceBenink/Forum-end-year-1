@@ -177,7 +177,7 @@ class assembler{
         if ($this->_page_assembler->check_edit($this->_user, $data[0])||$this->_page_assembler->check_edit($this->_user, $data[0])=='owner') {
             $path = $_SESSION['path'];
             $path = explode("/", $path);
-            if ($element[2] == true) {
+            if ($element[2] == 'true') {
                 $vieuw = 8;
             } else {
                 $vieuw = 9;

@@ -134,7 +134,7 @@ class database{
     }
 
     public static function update_main_topic($title,$desc,$vieuw,$id){
-        database::no_return("UPDATE `main_topics` SET `name` = '$title', `description` = '$desc' `user_level_req_vieuw` = '$vieuw',WHERE `main_topics`.`id` = $id;");
+        database::no_return("UPDATE `main_topics` SET `name` = '$title', `description` = '$desc', `user_level_req_vieuw` = '$vieuw' WHERE `main_topics`.`id` = $id;");
     }
 
     public static function update_post($title,$desc,$content,$vieuw,$id){

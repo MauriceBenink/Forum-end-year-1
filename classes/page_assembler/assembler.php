@@ -18,7 +18,7 @@ class assembler{
 
     public function assamble_page()
     {
-        echo "<br>";    
+        echo "<br>";
         if(empty($this->_data)||!isset($this->_data)){
             if (count($this->_path) >= 3) {
                 $post = database::get_post($this->_path[2]);
@@ -281,7 +281,6 @@ class assembler{
         } else {
             $level = $level1;
         }
-
 
         if ($level >= $user[0]['level']) {
             if (!preg_match('/[\(\)\[\]\}\{\<\>\;]/', $content[0] . '' . $content[1] . '' . $content[2])) {

@@ -46,8 +46,10 @@ if(isset($_GET['path'])&&!empty($_GET['path'])){
     echo "<div id = level-up-button><button>back up</button></div>";
     echo "<div id = to-top-button><button>to main-topics</button></div>";
     $test = new assembler($user,$_GET['path']);
+    $_SESSION['path'] = $_GET['path'];
 }else{
     $test = new assembler($user);
+    $_SESSION['path'] = '';
 }
 
 if(isset($_SESSION['delete'])&&!empty($_SESSION['delete'])&&isset($_SESSION['id'])){

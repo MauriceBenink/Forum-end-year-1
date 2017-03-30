@@ -29,7 +29,12 @@ if((isset($_POST["to_top"]))){
 }
 
 if(isset($_POST['edit_button'])&&!empty($_POST['edit_button'])) {
-    $path = explode('/', $_SESSION['path']);
+    if(isset($_SESSION['path'])&&!empty($_SESSION['path'])){
+        $path = explode('/', $_SESSION['path']);
+    }else{
+        $path = [1,2,3,4,5];
+    }
+
     if (count($path) == 3) {
         include("nice_edit.php");
         $rest = '<input class = "geustsee" type="checkbox" name="cansee"> geusts can see this comment<br><button id = "edit_comment">edit</button>';
@@ -79,8 +84,8 @@ $(document).find('#Insert-container').html('$niceEdit'+elementComment+'</div></d
         }
         switch (count($path)) {
             case 1:
-                $data = database::standard("SELECT * FROM sub_topics WHERE id ={$_POST['edit_button']}");
-                $content ='<br><br>';
+                $data = database::standard("SELECT * FROM sub_topics WHERE id ={$_POST['edit_button']}")[0];
+                $content ='"<br><br>"';
                 $elementcont = "elementcont = kasdhjkashdjkahskjdhaskjhjsahkjdhaksjdhjahdskajshdjkashdjkahsdjkahkjdshkjashdjkahsjkdhasjkdhakhsdkajsdhkahsdkjdshakjdhaksjdh;";
                 break;
             case 2:
@@ -89,12 +94,13 @@ $(document).find('#Insert-container').html('$niceEdit'+elementComment+'</div></d
                 $elementcont = "elementcont = $(element).children().eq(4).val();";
                 break;
             default:
-                $data = database::standard("SELECT * FROM main_topics WHERE id ={$_POST['edit_button']}");
-                $content ='<br><br>';
-                $elementcont = "elementcont = kasdhjkashdjkahskjdhaskjhjsahkjdhaksjdhjahdskajshdjkashdjkahsdjkahkjdshkjashdjkahsjkdhasjkdhakhsdkajsdhkahsdkjdshakjdhaksjdh;";
+                $data = database::standard("SELECT * FROM main_topics WHERE id ={$_POST['edit_button']}")[0];
+                $content = '"<br><br>"';
+                $elementcont = "elementcont = 'kasdhjkashdjkahskjdhaskjhjsahkjdhaksjdhjahdskajshdjkashdjkahsdjkahkjdshkjashdjkahsjkdhasjkdhakhsdkajsdhkahsdkjdshakjdhaksjdh';";
                 break;
 
         }
+
         if($data['user_level_req_vieuw'] == 8){
             $checked = "checked";
         }else{

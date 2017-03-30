@@ -13,7 +13,7 @@ if(isset($_GET['path'])&&!empty($_GET['path'])){
 }
 
 if(isset($_SESSION['id'])&&!empty($_SESSION['id'])) {
-    print_r($_SESSION);
+    //print_r($_SESSION);
     $user = database::get_user($_SESSION['id']);
     $display = $user[0]['display_name'];
     $status = explode(",", $user[0]['status']);
@@ -76,7 +76,7 @@ if (isset($_POST['logout'])) {
     unset($_SESSION['id']);
     header("Location: landing.php?");
 }
-debug_r($test);
+//debug_r($test);
 echo "<div id = forum-container>";
 $test->assamble_page();
 echo "</div>";

@@ -13,7 +13,7 @@ class assembler{
         $this->_data = $this->path_to_data($path);
         $this->_user = $user;
         $this->_page_assembler = new page_assembler;
-        print_r( $this->getType());
+        //print_r( $this->getType());
     }
 
     public function assamble_page()

@@ -18,6 +18,7 @@ class assembler{
 
     public function assamble_page()
     {
+        echo "<br>";    
         if(empty($this->_data)||!isset($this->_data)){
             if (count($this->_path) >= 3) {
                 $post = database::get_post($this->_path[2]);

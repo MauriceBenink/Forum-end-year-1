@@ -83,7 +83,7 @@ class page_assembler extends assembler {
         if((!isset($post)||empty($post))&&isset($author['comment_footer'])){
             $return .= "<div class = comment-footer>".$author["comment_footer"]."</div>";
         }
-        $return .="</div></div></div>";
+        $return .="</div></div></div><br>";
         return $return;
 
     }
@@ -156,7 +156,7 @@ class page_assembler extends assembler {
         }
         $return .="</div>";
         $return .="<div class = 'post-description'>".$data['description']."</div>";
-        $return .="</div></div>";
+        $return .="</div></div><br>";
         return  $return;
     }
 
